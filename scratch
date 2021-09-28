@@ -1,0 +1,9 @@
+	<Image
+	src="/images/orbital_4.png" // Route of the image file
+	height={600} // Desired size with correct aspect ratio
+	width={1000} // Desired size with correct aspect ratio
+	alt="Your Name"
+	/>
+
+
+

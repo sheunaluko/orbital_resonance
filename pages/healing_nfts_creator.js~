@@ -1,0 +1,13 @@
+
+
+export default function E() {
+
+
+    let msg = "Sheun Aluko, the creator of healing-nfts.art, is a physician, software engineer, musician, and yoga practitioner who is of Nigerian and Singaporean background. Sheun - or Shay as most people call him - endeavors to infuse his art with elements of the beautiful harmony between the scientific and spiritual worlds. The Orbital-NFTs project began as an exploration. Based on a simple script of less than 20 lines of code, the orbital trajectory of an object is simulated based on one parameter - the strength of the accelerative force it feels to the center. Randomly varying this parameter produces a whole world of fascinated designs, all claimable as a unique NFT and each of which embodies the healing harmony of science and life. Which one will you discover?"
+
+    return (
+	    <h1>{msg} </h1>
+
+    ) 
+    
+} 
