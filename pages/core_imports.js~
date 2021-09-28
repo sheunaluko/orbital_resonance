@@ -1,7 +1,0 @@
-import Link from 'next/link'
-
-
-
-module.eports = {
-    Link 
-} 

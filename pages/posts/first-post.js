@@ -1,7 +1,7 @@
 import {
     Link ,
     Image, 
-} from "../core_imports.js" 
+} from "../../src/core_imports.js" 
 
 let nums = [1,2,3,4,5,6,10 ] 
 

@@ -1,7 +1,7 @@
 import {
     Link ,
     Image, 
-} from "./core_imports.js" 
+} from "../src/core_imports.js" 
 
 
 

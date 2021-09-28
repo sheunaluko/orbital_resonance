@@ -7,7 +7,7 @@ import "animate.css"
 
 import {
     Link 
-} from "./core_imports.js" 
+} from "../src/core_imports.js" 
 
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
 
 	<main className={styles.main}>
 
-	    <h1 className={styles.title} className="animate__animated animate__bounce ">O r b i t a l - R e s o n a n c e</h1>
+	    <h1 className={"animate__animated animate__bounce" }>O r b i t a l - R e s o n a n c e</h1>
 
 
 	
