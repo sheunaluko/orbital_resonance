@@ -35,7 +35,7 @@ export default function Home() {
 	speed={70}
 	    >
 	    {
-		imgs.map( i => <div key={i} className={styles.increaseOnHover}>
+		imgs.map( i => <div key={i} className={styles.imageContainer}>
 			  <Image src={i} width={w} height={h} />
 			  </div> 
 			)
