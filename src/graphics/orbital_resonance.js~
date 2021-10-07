@@ -1,0 +1,72 @@
+
+/* 
+   Main script for implementing the orbital drawings 
+   @Copyright Sheun Aluko, 2021 - All Rights Reserved 
+*/
+
+import {
+   getRNG 
+}  from "./art_blocks_utils.js" ;
+
+import {
+    wait 
+} from "../core_imports.js" 
+
+var  R = getRNG() ;  //random number generator
+
+export function getRandomParams() {
+    let params  = {
+	'iterations' : R.random_num(2000, 10000) ,
+	'dot_sz'     : R.random_num(0,6) , 
+	'lines'      : R.random_bool(0.1) ,
+	'center_sz'  : 4 ,
+	'acc'        : R.random_num(0.1,10) 
+    }  ;
+    return params 
+}
+
+
+export function get_static_drawer (acc_scale) {
+    //set up persistent variables in this closure
+    let static_scale = 0.45
+    let x_start = Math.min(window.innerWidth*static_scale,window.innerHeight*static_scale)
+    let pos = createVector(x_start,0) ;  let vel = createVector(0,4) ; 
+    return function() {
+	let acc = createVector(0 - pos.x, 0 - pos.y) ;
+	let acc_normalized = acc.mult(1/acc.mag()) ;
+	vel.add(acc_normalized.mult(acc_scale)) ;
+	let old_pos = pos.copy() 
+	pos.add(vel) ; 
+	//update time and position  and return a copy 
+	return pos.copy() 	
+    }
+}
+
+export function get_points(params) {
+    let dfn = get_static_drawer(params.acc) ; let pts = [] 
+    for (var i=0; i < params.iterations ; i++) { pts.push(dfn()) } ; return pts ; 
+}
+
+export async function draw_points(pts, params) {
+    fill(0); let old_pos = null; 
+    for (var pos of pts) {
+	ellipse(0,0,params.center_sz)  ;
+	ellipse(pos.x,pos.y , params.dot_sz)
+	if (params.lines && old_pos) {
+	    line(old_pos.x,old_pos.y, pos.x,pos.y) ;	    
+	}
+	old_pos = pos.copy()
+
+	/* 
+	   Can have an optional delay here to change how quickly the dots are drawn 
+	*/
+	if (params.draw_interval ) { 
+	    let delay = await wait( params.draw_interval )
+	} 
+	
+    } 
+} 
+
+export function GetDrawer() {
+    
+} 

@@ -1,0 +1,8 @@
+.explorer {
+    display : flex;
+    flex-direction : row; 
+}
+
+.explorer_controls {
+} 
+ 

@@ -54,8 +54,8 @@ export default function Home() {
 
 	<div className={styles.foot}> 
 	<span> 
-	<Link href="/explorer">
-	<a> Explorer </a>
+	<Link href="/">
+	<a> Mint </a>
 	</Link>
 
  	

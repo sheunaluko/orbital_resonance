@@ -33,10 +33,6 @@
     align-items: center;
 }
 
-.imageContainer:hover {
-    padding : 50px; 
-}
-
 .footer a {
   display: flex;
   justify-content: center;
@@ -130,3 +126,6 @@
     flex-direction: column;
   }
 }
+
+
+
