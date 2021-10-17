@@ -103,6 +103,16 @@ export function Logger(name ) {
 } 
 
 
+export var full_height_style = `
+      html,
+      body,
+      body > div:first-child,
+      div#__next,
+      div#__next > div {
+        height: 100%;
+      }
+    `    
+
 
 let core_imports = {
     Link,
@@ -121,3 +131,4 @@ let core_imports = {
 module.exports = core_imports ;  
 
 if (!server_render()) {     window.core_imports = core_imports ;  }  
+
