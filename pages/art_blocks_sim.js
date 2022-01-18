@@ -12,8 +12,7 @@ import {
     animateCSS,
 } from "../src/core_imports.js"
 
-import {ExplorerWidget} from "../src/widgets.js"  ;
-
+import {ABWidget} from "../src/ABWidget.js"  ;
 
 export default function App() {
 
@@ -28,7 +27,7 @@ export default function App() {
           <main className={styles.explorer_main}  >
 
             <div style={{height : "100%"}}>
-              <ExplorerWidget/>
+              <ABWidget/>
             </div>
 
 	  
@@ -58,19 +57,4 @@ export default function App() {
     )
 }
 
-
-
-let Foot = function() {
-    return (
-        
-	<div className={styles.foot}>
-          <div style={{flexGrow : 1}} />
-	<Link href="/">
-	<a> Home </a>
-	</Link>
-        </div>
-
-
-    ) 
-} 
 

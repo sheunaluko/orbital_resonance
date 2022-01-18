@@ -108,4 +108,5 @@ export function Main(p) {
  Creator selected ranges that result in most interesting (resonant) designs  
 */
 let acc_ranges = [ [0,10.2] , [13.33, 17.5] , [22.758,33.62], [45.05,45.5],
-		   [46.476, 99], [148.364,194.343 ] ] 
+		   [46.476, 99], [148.364,194.343 ] ]
+

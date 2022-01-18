@@ -71,14 +71,6 @@ export default function Home() {
 
 	<br/> 
 
-        <a
-        href="" 
-        target="_blank"
-        rel="noopener noreferrer"
-        >
-        H e a l i n g - N F T s . a r t  {' '}
-	
-        </a>
 	</div> 
 
 

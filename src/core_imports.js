@@ -4,7 +4,6 @@ import Marquee from "react-fast-marquee";
 
 function server_render() {  return (typeof window === "undefined") }
 
-
 const animateCSS = (element, animation, prefix = 'animate__') =>
   // We create a Promise and return it
   new Promise((resolve, reject) => {

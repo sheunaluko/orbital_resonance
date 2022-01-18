@@ -182,6 +182,8 @@ var ExplorerSketch = function(p) {
         p.clear() 
 	let pts = await get_points(params) ;
 	let _   = await display_points(pts,pphash)
+
+	params
 	
     } 
     
