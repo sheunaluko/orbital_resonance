@@ -8,9 +8,7 @@ import {
     Marquee,
     loadScript,
     animateCSS, 
-} from "../src/core_imports.js"
-
-import {IndexWidget} from "../src/IndexWidget.js"
+} from "../src/core_imports.js" 
 
 /*
    dynamically load p5js 
@@ -19,6 +17,9 @@ await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" 
 
 // -- 
 
+let imgs = Array(17).fill(0).map( (v,i) => `/images/example_imgs/o${i+1}.png` )
+let w = "410px" ; 
+let h = "400px" ; 
 
 export default function Home() {
     return (
@@ -43,9 +44,21 @@ export default function Home() {
 
 	</div> 
 
-
-	    <IndexWidget />
 	
+
+
+	<Marquee
+	speed={70}
+	>
+	{
+	    imgs.map( i => <div key={i} className={styles.imageContainer}>
+		<Image src={i} width={w} height={h} />
+		</div> 
+	    )
+	} 
+	</Marquee>
+	<div id="forCanvas">
+	</div> 
 
 
 	<div className={styles.foot}> 

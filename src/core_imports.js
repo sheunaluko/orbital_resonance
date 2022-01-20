@@ -113,6 +113,45 @@ export var full_height_style = `
     `    
 
 
+/*
+Widgets  
+*/
+
+
+function ArrowBack(route) {
+    return function() {
+	setInterval(
+	    function(){
+		animateCSS('#leftArrow', 'shakeX')
+	    }, 10000
+	); 
+	
+
+	return (
+		<div
+	    id="leftArrow"
+	    onClick={function(){window.location=route}}	
+	    style={{
+	        cursor : "pointer",
+		zIndex : 99 , 
+		borderRadius: "50%",
+		width: "20px",
+		height: "20px",
+		border: "1px solid black",
+		position: "absolute",
+		left: "30px",
+		top: "30px", 		
+	    }}>
+
+
+		&#8592;	
+	    
+	    </div> 
+	)
+    }
+}
+
+
 let core_imports = {
     Link,
     Image,
@@ -123,7 +162,8 @@ let core_imports = {
     ms,
     wait_until,
     wait,
-    Logger , 
+    Logger ,
+    ArrowBack, 
 } 
 
 

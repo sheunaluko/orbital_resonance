@@ -1,0 +1,47 @@
+import {useEffect} from 'react' ;
+
+import {
+    loadScript,
+    animateCSS,
+    server_render ,
+    wait,
+} from "./core_imports.js" ; 
+
+import {
+    params,
+    Sketch,
+    random_params 
+} from "./ABsketch.js" 
+
+export function IndexWidget()  {
+    if (!server_render()) { 
+        useEffect( async ()=> {
+            console.log("Index Widget loaded") ;
+	    /*
+	      dynamically load p5js 
+	    */
+	    let v = await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" , ()=>{console.log("Explorer requested p5")}) ; 
+	    let timedOut = await wait_until( ()=> window.p5  , 10000, 100) ;
+	    if (timedOut) { log("timedout") } else { log("Detected p5")  } ;
+	    await wait_until( ()=> window.p5, 10000, 100) ;	    	    
+	    if (!server_render()) { 
+		window.ep = new window.p5(Sketch, window.document.getElementById('IndexWidget'));
+	    } 
+	})
+    }
+    return (
+	    <div id="IndexWidget" /> 
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+

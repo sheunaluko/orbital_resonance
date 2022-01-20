@@ -10,13 +10,13 @@ import {
     server_render ,
     wait_until ,
     Logger ,
-    wait, 
+    wait,
+    ArrowBack, 
 } from "./core_imports.js" ; 
 
 import {
-    getRNG ,
-    getRandomParams,  
-} from "./graphics/art_blocks_utils"
+    get_random_params 
+} from "./ABsketch.js" 
 
 import {
     Slider, 
@@ -36,7 +36,7 @@ if (!server_render()){
 }
 
 // define the sketch 
-var ExplorerSketch = function(p) {
+var Sketch = function(p) {
     
     var RENDER_DIM = 2400;
     var WIDTH = window.innerWidth;var HEIGHT = window.innerHeight;
@@ -46,11 +46,11 @@ var ExplorerSketch = function(p) {
 
     let get_drawer = function(params) {
 	//generates all points using the same RENDER_DIM 
-	let {acc : _acc, acc_fine, acc_ultra_fine,x_start,v_start}  =  params ;
+	let {CoarseGravity : _acc, FineGravity : acc_fine, PreciseGravity :acc_ultra_fine,Radius,Velocity : v_start}  =  params ;
 	let a_tot =  _acc + acc_fine  + acc_ultra_fine
-	let x_init = (x_start/2)*RENDER_DIM ; //R in pixels
+	let x_init = (Radius/2)*RENDER_DIM ; //R in pixels
 	let v_circular = Math.sqrt(a_tot*x_init) //Circular velocity 
-	let v_init = v_circular * params.v_start
+	let v_init = v_circular * v_start
 	let dt = 0.3 //params.dt; 
 	let pos = p.createVector(x_init,0) ;  let vel = p.createVector(0,v_init) ;
 	return function() {
@@ -63,8 +63,10 @@ var ExplorerSketch = function(p) {
 	}
     }
     
-    let get_points = function(params) {let dfn=get_drawer(params);let pts=[];for(var i=0;i<params.iterations;i++){let pt = dfn(); if((i% 3) == 0){pts.push(pt)}};return pts}
+    let get_points = function(params) {let dfn=get_drawer(params);let pts=[];for(var i=0;i<params.Time;i++){let pt = dfn(); if((i% 3) == 0){pts.push(pt)}};return pts}
 
+    var transparency = 255; 
+    
     let display_points = async function(pts,init_hash) {
 
 	
@@ -79,15 +81,21 @@ var ExplorerSketch = function(p) {
 	    
 	    //scale the pos 
 	    pos.x = pos.x*M ; pos.y = pos.y*M ; 
-            n += 1 
-	    p.ellipse(0,0,params.center_sz)  ;
+            n += 1
+	    
+	    p.ellipse(0,0,params.SunSize)  ;
             p.push() ;
             p.noStroke() ; 
-            p.fill(0) ;
-	    p.ellipse(pos.x,pos.y , params.dot_sz)
+	    //add color here
+	    //transparency = transparency + 1 ;
+	    //let c = p.color(153, 102, 255,transparency % 255)	    
+            //p.fill(c) ;
+            p.fill(0) ;	    	    	    
+	    //--- 
+	    p.ellipse(pos.x,pos.y , params.OrbiterSize)
             p.pop() ;
             
-	    if (params.lines && old_pos) {
+	    if (params.Path && old_pos) {
 		p.line(old_pos.x,old_pos.y, pos.x,pos.y) ;	    
 	    }
 	    old_pos = pos.copy()
@@ -100,64 +108,50 @@ var ExplorerSketch = function(p) {
 
     
     let params = {
-	'iterations' : 10000,
-        'iterationsMin' : 0,
-        'iterationsMax' : 90000,
-        'iterationsStep' : 50 , 
-	'dot_sz'     : 4,
-	'dot_szMin'     : 0,
-	'dot_szMax'     : 9, 	
-	'lines'      : false, 
-	'center_sz'  : 4 ,
-	'acc'  : 2,
-	'accMin'  : 0 ,
-	'accMax'  : 11 ,
-	'accStep'  : 0.01 ,
-	'acc_fine'  : 0 ,
-	'acc_fineMin'  : -0.03 ,
-	'acc_fineMax'  : 0.03 ,
-	'acc_fineStep'  : 0.0001 ,                        
-	'acc_ultra_fine'  : 0 ,
-	'acc_ultra_fineMin'  : -0.003 ,
-	'acc_ultra_fineMax'  : 0.003 ,
-	'acc_ultra_fineStep'  : 0.00001 ,
-	
-        'x_start' : 0.8,
-	'x_startMin' : 0.3,
-	'x_startMax' : 0.9,
-	'x_startStep' : 0.05, 	
-
-        'v_start' : 0.5,
-	'v_startMin' : 0,
-	'v_startMax' : 1,
-	'v_startStep' : 0.05,
-
-
-	'draw'      : true,
+        'Radius' : 0.8,
+	'RadiusMin' : 0.3,
+	'RadiusMax' : 0.9,
+	'RadiusStep' : 0.05, 		
+        'Velocity' : 0.5,
+	'VelocityMin' : 0,
+	'VelocityMax' : 1,
+	'VelocityStep' : 0.05,
+	'OrbiterSize'     : 4,
+	'OrbiterSizeMin'     : 0,
+	'OrbiterSizeMax'     : 9,
+	'SunSize'  : 4 ,
+	'CoarseGravity'  : 2,
+	'CoarseGravityMin'  : 0 ,
+	'CoarseGravityMax'  : 11 ,
+	'CoarseStep'  : 0.01 ,
+	'FineGravity'  : 0 ,
+	'FineGravityMin'  : -0.03 ,
+	'FineGravityMax'  : 0.03 ,
+	'FineGravityStep'  : 0.0001 ,
+	'PreciseGravity'  : 0 ,
+	'PreciseGravityMin'  : -0.003 ,
+	'PreciseGravityMax'  : 0.003 ,
+	'PreciseGravityStep'  : 0.00001 ,
+	'Path'      : false,
+	'Time' : 10000,
+        'TimeMin' : 0,
+        'TimeMax' : 90000,
+        'TimeStep' : 50 ,
+	'draw'      : false,
 	'delay'      : 0,
 	'delayMin'      : 0,
 	'delayMax'      : 200,
 	'delayStep'      : 1, 			
+    }
 
-	/*
-        'dt' : 0.1,
-	'dtMin' : 0.1,
-	'dtMax' : 1,
-	'dtStep' : 0.05, 	
-
-        'sp' : 1,
-	'spMin' : 1,
-	'spMax' : 100,
-	'spStep' : 1, 	
-	*/ 
-	
-	
-    } 
+    params = Object.assign( params, get_random_params() ) 
 
     p.setup = async function() {
 	p.createCanvas(DIM,DIM,p.WEBGL)  ;
 	var gui = p.createGui(this, 'Orbital Config');
 	gui.addObject(params);
+	gui.setPosition(20,90)	
+	window.gui = gui ;
     }
 
     //var last_param_str = null ;
@@ -182,32 +176,47 @@ var ExplorerSketch = function(p) {
         p.clear() 
 	let pts = await get_points(params) ;
 	let _   = await display_points(pts,pphash)
-	
+
     } 
     
 }
 
+let _ArrowBack = ArrowBack("/")
 
 export function ExplorerWidget()  {
     if (!server_render()) { 
         useEffect( async ()=> {
             console.log("Explorer loaded") ;
-	    console.log(window) ;
 	    /*
 	      dynamically load p5js 
 	    */
-	    let v = await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" , ()=>{console.log("Explorer requested p5")}) ; 
+	    let v = await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" , ()=>{console.log("Explorer requested p5")}) ;
+
 	    let timedOut = await wait_until( ()=> window.p5  , 10000, 100) ;
 	    if (timedOut) { log("timedout") } else { log("Detected p5")  } ;
+
+
 	    await loadScript("/src/p5.gui.js" , ()=>{console.log("Explorer requested p5.gui")}) ; 
 	    await loadScript("/src/quicksettings.js" , ()=>{console.log("Explorer requested QS")}) ;
-	    await wait_until( ()=> window.p5.prototype.createGui  , 10000, 100) ;	    	    
-	    if (!server_render()) { 
-		window.ep = new window.p5(ExplorerSketch, window.document.getElementById('ExplorerMainContainer'));
+
+	    await wait_until( ()=> window.p5.prototype.createGui  , 10000, 100) ;
+
+	    if (!server_render()) {
+
+		window.ep = new window.p5(Sketch, window.document.getElementById('MainContainer'));
 	    } 
 	})
     }
-    return ( <div id="ExplorerMainContainer" className={styles.full_height_flex}>   </div> ) 
+
+ return (
+	    <div style={{display: 'flex',
+			flexDirection : 'column' ,
+			 alignItems : 'center'}}>
+	    <_ArrowBack /> 
+	    <div id="MainContainer" className={styles.full_height_flex}>
+	    </div>
+	 </div> 
+    )    
 }
 
 

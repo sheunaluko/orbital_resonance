@@ -1,0 +1,68 @@
+  let params = {
+
+	
+        'Radius' : 0.8,
+	'RadiusMin' : 0.3,
+	'RadiusMax' : 0.9,
+	'RadiusStep' : 0.05, 		
+
+
+        'Velocity' : 0.5,
+	'VelocityMin' : 0,
+	'VelocityMax' : 1,
+	'VelocityStep' : 0.05,
+
+	
+	'OrbiterSize'     : 4,
+	'OrbiterSizeMin'     : 0,
+	'OrbiterSizeMax'     : 9,
+
+	
+	'SunSize'  : 4 ,
+	
+
+
+	'CoarseGravity'  : 2,
+	'CoarseGravityMin'  : 0 ,
+	'CoarseGravityMax'  : 11 ,
+	'CoarseStep'  : 0.01 ,
+	
+	'FineGravity'  : 0 ,
+	'FineGravityMin'  : -0.03 ,
+	'FineGravityMax'  : 0.03 ,
+	'FineGravityStep'  : 0.0001 ,
+	
+	'PreciseGravity'  : 0 ,
+	'PreciseGravityMin'  : -0.003 ,
+	'PreciseGravityMax'  : 0.003 ,
+	'PreciseGravityStep'  : 0.00001 ,
+
+	'Path'      : false,
+	
+	'Time' : 10000,
+        'TimeMin' : 0,
+        'TimeMax' : 90000,
+        'TimeStep' : 50 ,
+	
+
+
+	'draw'      : false,
+	'delay'      : 0,
+	'delayMin'      : 0,
+	'delayMax'      : 200,
+	'delayStep'      : 1, 			
+
+	/*
+        'dt' : 0.1,
+	'dtMin' : 0.1,
+	'dtMax' : 1,
+	'dtStep' : 0.05, 	
+
+        'sp' : 1,
+	'spMin' : 1,
+	'spMax' : 100,
+	'spStep' : 1, 	
+	*/ 
+	
+	
+    } 

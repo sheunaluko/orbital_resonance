@@ -1,45 +1,8 @@
-import {useEffect} from 'react' ; 
-
-import styles from '../styles/Explorer.module.css'
-
 import * as abu from './art_blocks_utils.js' ; 
-
-import {
-    Link ,
-    Marquee,
-    loadScript,
-    animateCSS,
-    server_render ,
-    wait_until ,
-    Logger ,
-    wait,
-    ArrowBack
-} from "./core_imports.js" ; 
-
-import {
-    getRNG ,
-    getRandomParams,  
-} from "./graphics/art_blocks_utils"
-
-import {
-    Slider, 
-} from "./mui"
-
-var log = Logger("widgets") ;
-
-
 //utils
 function get_square_size() { return Math.min(window.innerWidth, window.innerHeight) }
-
-//export to window for dev purposes
-if (!server_render()){ 
-    window.widget_dev = {
-	get_square_size , 
-    } 
-}
-
 //define the params object
-var params = {
+export var params = {
     'Radius' : 0.8,
     'Velocity' : 0.5,
     'OrbiterSize'     : 4,
@@ -52,7 +15,7 @@ var params = {
 } 
 
 // define the sketch 
-var Sketch = function(p) {
+export var Sketch = function(p) {
     
     var RENDER_DIM = 2400;
     var WIDTH = window.innerWidth;var HEIGHT = window.innerHeight;
@@ -154,71 +117,8 @@ var Sketch = function(p) {
     
 }
 
-function generate() {
+export function random_params() {
     //generates new parameters
     params = abu.get_params()
     console.log(params) 
 } 
-
-function Footer() {
-
-    setTimeout ( function(){
-	document.getElementById("footer").style.visibility = "" 
-    }, 500)
-
-
-    
-    return (
-	    <div
-	    id="footer" 
-	    style={{
-		visibility : "hidden"
-	    }}>
-	    <button onClick={generate}>
-	      g e n e r a t e 
-	    </button> 
-	    </div> 
-    ) 
-}
-
-let _ArrowBack = ArrowBack("/")
-
-export function ABWidget()  {
-    if (!server_render()) { 
-        useEffect( async ()=> {
-            console.log("AB loaded") ;
-	    /*
-	      dynamically load p5js 
-	    */
-	    let v = await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" , ()=>{console.log("Explorer requested p5")}) ; 
-	    let timedOut = await wait_until( ()=> window.p5  , 10000, 100) ;
-	    if (timedOut) { log("timedout") } else { log("Detected p5")  } ;
-	    await wait_until( ()=> window.p5, 10000, 100) ;	    	    
-	    if (!server_render()) { 
-		window.ep = new window.p5(Sketch, window.document.getElementById('MainContainer'));
-	    } 
-	})
-    }
-    return (
-	    <div style={{display: 'flex',
-			flexDirection : 'column' ,
-			 alignItems : 'center'}}>
-	    <_ArrowBack /> 
-	    <div id="MainContainer" className={styles.full_height_flex}>
-	    </div>
-	    <Footer /> 	    
-	 </div> 
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
