@@ -66,8 +66,13 @@ export default function Home() {
 	<Link href="/explorer">
 	<a> Explorer </a>
 	    </Link>
-	
 
+	&bull;
+
+	<Link href="https://github.com/sheunaluko/orbital_resonance">
+	<a> Github </a>
+	</Link>	
+	
 	
 	</span> 
 

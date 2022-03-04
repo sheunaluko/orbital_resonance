@@ -6,4 +6,4 @@ Generative art created by simulating the orbit of a singular body.
 
 All rights reserved. 
 
-Live app [here](http://orbital-resonance-six.vercel.app) 
+Visit the live app at [orbital-resonance.art](http://orbital-resonance.art) 
