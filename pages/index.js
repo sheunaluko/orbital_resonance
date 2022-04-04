@@ -80,7 +80,12 @@ export default function Home() {
 
 	</div> 
 
+        <div style={{position:"absolute" , right : 20 , bottom : 20 , fontSize : '12px'}}>
+            	<Link href="https://github.com/sheunaluko/orbital_resonance">
+	          <a> v0.2 </a>
+	        </Link>	
 
+          </div>
 
 	</main>
 	

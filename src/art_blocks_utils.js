@@ -54,7 +54,7 @@ export function get_params() {
     let seed = parseInt(tokenData.hash.slice(0, 16), 16)
     let R = new Random(seed)
     let params  = {
-	'Radius' : R.random_num(0.3, 0.9) ,
+	'Radius' : R.random_num(0.4, 0.9) ,
 	'Velocity'     : R.random_normal(0,1) ,
 	'OrbiterSize'     : R.random_normal(0,5) ,
 	'SunSize'     : R.random_num(0,15) , 		
