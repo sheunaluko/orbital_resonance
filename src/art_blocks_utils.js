@@ -33,6 +33,17 @@ class Random {
   random_bool(p) {
     return this.random_dec() < p
   }
+    random_normal(a,b) {
+	let gaussian_interval = [a,b]
+	let mean = (gaussian_interval[1]+gaussian_interval[0])/2
+	let sd   = (gaussian_interval[1]-mean)/3 //99.7%
+	//use the box mueller approach below
+	let x1 = this.random_num(0,1) 
+	let x2 = this.random_num(0,1)	
+	let y = (Math.sqrt(-2*Math.log(x1)))*Math.cos(2*Math.PI*x2)
+	return y*sd + mean 	
+
+  }
   random_choice(list) {
     return list[Math.floor(this.random_num(0, list.length * 0.99))]
   }
@@ -44,11 +55,11 @@ export function get_params() {
     let R = new Random(seed)
     let params  = {
 	'Radius' : R.random_num(0.3, 0.9) ,
-	'Velocity'     : R.random_num(0,1) ,
-	'OrbiterSize'     : R.random_num(0,9) ,
+	'Velocity'     : R.random_normal(0,1) ,
+	'OrbiterSize'     : R.random_normal(0,5) ,
 	'SunSize'     : R.random_num(0,15) , 		
 	'Path'      : R.random_bool(0.1) ,
-	'Time'      : R.random_num(10000,100000), 
+	'Time'      : R.random_num(20000,100000), 
 	'CoarseGravity'        : R.random_num(0,11),
 	'FineGravity'        : R.random_num(-0.03,0.03),
 	'PreciseGravity'        : R.random_num(-0.03,0.03),

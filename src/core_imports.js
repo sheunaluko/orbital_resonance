@@ -2,13 +2,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Marquee from "react-fast-marquee";
 
-function server_render() {  return (typeof window === "undefined") }
+function server_render() {  return (typeof window === "undefined") } ; 
+
 
 const animateCSS = (element, animation, prefix = 'animate__') =>
   // We create a Promise and return it
   new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    const node = document.querySelector(element);
+      const animationName = `${prefix}${animation}`;
+      var node ; 
+      if (!server_render()){   
+	   node = document.querySelector(element);
+      } 
 
     node.classList.add(`${prefix}animated`, animationName);
 

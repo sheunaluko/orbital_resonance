@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -16,8 +16,7 @@
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-fast-marquee": "^1.2.1",
-    "tidyscripts_web": "^0.0.3"
+    "react-fast-marquee": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",
