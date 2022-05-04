@@ -1,9 +1,9 @@
 ## Orbital Resonance 
 
-![Orbital Resonance Image](/public/images/example_imgs/o1.png)
+![Orbital Resonance Image](/public/images/orbital_resonance_gif.gif)
 
 Generative art created by simulating the orbit of a singular body.
 
-All rights reserved. 
+Pending Application to the Art Blocks Platform. All rights reserved. 
 
-Visit the live app at [orbital-resonance.art](http://orbital-resonance.art) 
+Visit the live app at [orbital-resonance.art](http://orbital-resonance.art)!
